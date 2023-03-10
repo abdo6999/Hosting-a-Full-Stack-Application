@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Front-End Build
           command: |
-          npm run frontend:build
+            npm run frontend:build
             echo "TODO: Build the frontend app"
       # TODO: Build the backend API      
       - run:
