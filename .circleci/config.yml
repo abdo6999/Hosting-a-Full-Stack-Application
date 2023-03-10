@@ -55,8 +55,7 @@ jobs:
     steps:
       - node/install:
           node-version: '14.15' 
-      - eb/setup:
-        context: aws-confige
+      - eb/setup
       - aws-cli/setup
       - checkout
       - run:
@@ -74,8 +73,7 @@ jobs:
 workflows:
   udagram:
     jobs:
-      - build:
-        context: aws-confige
+      - build
       - hold:
           filters:
             branches:
