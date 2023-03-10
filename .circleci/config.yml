@@ -26,18 +26,7 @@ jobs:
             npm run frontend:install
       # TODO: Install dependencies in the the backend API          
       - run:
-          environment:
-            POSTGRES_USERNAME: POSTGRES_USERNAME
-            POSTGRES_PASSWORD: POSTGRES_PASSWORD 
-            POSTGRES_HOST: POSTGRES_HOST
-            POSTGRES_DB: POSTGRES_DB
-            AWS_BUCKET: AWS_BUCKET
-            AWS_REGION: AWS_REGION
-            AWS_PROFILE: AWS_PROFILE
-            JWT_SECRET: JWT_SECRET
-            AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
-            URL: URL
+   
           name: Install API Dependencies
           command: |
            echo "TODO: Install dependencies in the the backend API  "
@@ -53,15 +42,6 @@ jobs:
             echo "TODO: Build the frontend app"
       # TODO: Build the backend API      
       - run:
-          name: API Build
-          command: |
-            echo "TODO: Build the backend API"
-  # deploy step will run only after manual approval
-  deploy:
-    docker:
-      - image: "cimg/base:stable"
-      # more setup needed for aws, node, elastic beanstalk
-    steps:
           environment:
             POSTGRES_USERNAME: POSTGRES_USERNAME
             POSTGRES_PASSWORD: POSTGRES_PASSWORD 
@@ -74,13 +54,34 @@ jobs:
             AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
             URL: URL
+          name: API Build
+          command: |
+            echo "TODO: Build the backend API"
+  # deploy step will run only after manual approval
+  deploy:
+    docker:
+      - image: "cimg/base:stable"
+      # more setup needed for aws, node, elastic beanstalk
+    steps:
+
       - node/install:
           node-version: '14.15' 
       - eb/setup
       - aws-cli/setup
       - checkout
       - run:
-
+          environment:
+            POSTGRES_USERNAME: POSTGRES_USERNAME
+            POSTGRES_PASSWORD: POSTGRES_PASSWORD 
+            POSTGRES_HOST: POSTGRES_HOST
+            POSTGRES_DB: POSTGRES_DB
+            AWS_BUCKET: AWS_BUCKET
+            AWS_REGION: AWS_REGION
+            AWS_PROFILE: AWS_PROFILE
+            JWT_SECRET: JWT_SECRET
+            AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+            URL: URL
           name: Deploy App
           # TODO: Install, build, deploy in both apps
           command: |
