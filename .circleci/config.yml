@@ -56,7 +56,11 @@ jobs:
     steps:
       - node/install:
           node-version: '14.15' 
-      - eb/setup
+      - eb/setup:
+        -run:     
+         environment:      
+            AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
       - aws-cli/setup
       - checkout
       - run:
@@ -75,8 +79,6 @@ jobs:
           name: Deploy App
           # TODO: Install, build, deploy in both apps
           command: |
-            echo ${POSTGRES_USERNAME}
-            echo ${AWS_ACCESS_KEY_ID}
             npm run frontend:install
             npm run frontend:build
             npm run frontend:deploy
