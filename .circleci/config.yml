@@ -44,18 +44,6 @@ jobs:
             echo "TODO: Build the frontend app"
       # TODO: Build the backend API      
       - run:
-          environment:
-            POSTGRES_USERNAME: POSTGRES_USERNAME
-            POSTGRES_PASSWORD: POSTGRES_PASSWORD 
-            POSTGRES_HOST: POSTGRES_HOST
-            POSTGRES_DB: POSTGRES_DB
-            AWS_BUCKET: AWS_BUCKET
-            AWS_REGION: AWS_REGION
-            AWS_PROFILE: AWS_PROFILE
-            JWT_SECRET: JWT_SECRET
-            AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
-            URL: URL
           name: API Build
           command: |
             npm run api:build
@@ -66,28 +54,22 @@ jobs:
       - image: "cimg/base:stable"
       # more setup needed for aws, node, elastic beanstalk
     steps:
-
       - node/install:
           node-version: '14.15' 
-      - eb/setup
-      - aws-cli/setup
-      - checkout
-      - run:
+      - eb/setup: 
           environment:
-            POSTGRES_USERNAME: POSTGRES_USERNAME
-            POSTGRES_PASSWORD: POSTGRES_PASSWORD 
-            POSTGRES_HOST: POSTGRES_HOST
-            POSTGRES_DB: POSTGRES_DB
-            AWS_BUCKET: AWS_BUCKET
-            AWS_REGION: AWS_REGION
-            AWS_PROFILE: AWS_PROFILE
-            JWT_SECRET: JWT_SECRET
             AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
-            URL: URL
+      - aws-cli/setup:
+          environment:
+            AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+      - checkout
+      - run:
           name: Deploy App
           # TODO: Install, build, deploy in both apps
           command: |
+            echo ${POSTGRES_USERNAME}
             npm run frontend:install
             npm run frontend:build
             npm run frontend:deploy
