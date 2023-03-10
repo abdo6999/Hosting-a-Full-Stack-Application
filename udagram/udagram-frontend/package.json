@@ -27,6 +27,8 @@
     "@ionic/angular": "^4.1.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.4",
+    "sequelize": "^6.29.3",
+    "sequelize-typescript": "^2.1.5",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -42,6 +44,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.12.0",
+    "@types/sequelize": "^4.28.14",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "codelyzer": "~4.5.0",
