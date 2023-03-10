@@ -31,11 +31,10 @@ jobs:
             npm run api:install
             echo "TODO: Install dependencies in the the backend API  "
       # TODO: Lint the frontend
-      # - run:
-      #     name: Front-End Lint
-      #     command: |
-      #       npm run frontend:lint
-      #       echo "TODO: Lint the frontend"
+      - run:
+          name: Front-End Lint
+          command: |
+            echo "TODO: Lint the frontend"
       # TODO: Build the frontend app
       - run:
           name: Front-End Build
@@ -56,7 +55,8 @@ jobs:
     steps:
       - node/install:
           node-version: '14.15' 
-      - eb/setup
+      - eb/setup:
+        context: aws-confige
       - aws-cli/setup
       - checkout
       - run:
@@ -84,6 +84,5 @@ workflows:
           requires:
             - build
       - deploy:
-      context: aws-confige
           requires:
             - hold
