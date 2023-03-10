@@ -33,6 +33,7 @@ This application is provided to you as an alternative starter project if you do 
 
 ```
 
+
 ### Installation
 
 Provision the necessary AWS services needed for running the application:
