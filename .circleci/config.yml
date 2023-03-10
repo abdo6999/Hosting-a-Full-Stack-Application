@@ -62,12 +62,6 @@ jobs:
       - image: "cimg/base:stable"
       # more setup needed for aws, node, elastic beanstalk
     steps:
-      - node/install:
-          node-version: '14.15' 
-      - eb/setup
-      - aws-cli/setup
-      - checkout
-      - run:
           environment:
             POSTGRES_USERNAME: POSTGRES_USERNAME
             POSTGRES_PASSWORD: POSTGRES_PASSWORD 
@@ -80,6 +74,13 @@ jobs:
             AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
             URL: URL
+      - node/install:
+          node-version: '14.15' 
+      - eb/setup
+      - aws-cli/setup
+      - checkout
+      - run:
+
           name: Deploy App
           # TODO: Install, build, deploy in both apps
           command: |
